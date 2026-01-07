@@ -1,0 +1,17 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+
+# Build / cache
+node_modules/
+dist/
+build/
+plugins/
+
+# Large / unnecessary
+*.apk
+*.log
+tmp/
