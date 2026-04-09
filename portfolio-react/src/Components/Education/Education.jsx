@@ -1,137 +1,128 @@
 import React from "react";
+import { motion } from "framer-motion";
 import "./Education.css";
 import sliit from "../../assets/sliit.webp";
 import aquainas from "../../assets/aquinas.jpg";
-
 import mrc from "../../assets/mrc.jpeg";
+import ct1 from "../../assets/ct1.jpg";
+import ct2 from "../../assets/ct2.jpg";
+import ct3 from "../../assets/ct3.jpg";
+import ct4 from "../../assets/ct4.jpg";
+
+const certifications = [
+  {
+    title: "Python for Beginners",
+    issuer: "University of Moratuwa",
+    image: ct4,
+  },
+  {
+    title: "Web Design for Beginners",
+    issuer: "University of Moratuwa",
+    image: ct3,
+  },
+  {
+    title: "SQL Analytics and BI on Databricks",
+    issuer: "Simplilearn",
+    image: ct1,
+  },
+  {
+    title: "Handling, storing & managing data for information management",
+    issuer: "UNICEF",
+    image: ct2,
+  },
+];
 
 function Education() {
   return (
-    
-    <div className="education-section">
-      <div className="my">
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <h1>Educational Background</h1>
-       
-      </div>
+    <section id="education" className="edu section-block">
+      <div className="section-wrap">
+        <p className="section-label">Background</p>
+        <h2 className="section-heading">Education &amp; credentials</h2>
+        <p className="section-sub">
+          Formal education and professional certificates that support my
+          technical foundation.
+        </p>
 
-      {/* Container for all education blocks */}
-      <div className="education-content">
-        {/* Education Block 1 */}
-        <div className="education-item">
-          {/* Left Card */}
-          <div className="education-card">
-            <div className="education-rating">★★★★★</div>
-            <p>
-              Pursuing a degree with a focus on software engineering, actively
-              engaging in various programming languages and technologies.
-            </p>
-            <img src={sliit} alt="SLIIT Logo" />
-          </div>
+        <h3 className="edu-subheading">Education</h3>
+        <div className="edu-timeline">
+          <motion.article
+            className="edu-item"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+          >
+            <div className="edu-item-badge">Current</div>
+            <div className="edu-item-main">
+              <h4 className="edu-degree">
+                BSc (Hons) in Information Technology
+              </h4>
+              <p className="edu-school">
+                Sri Lanka Institute of Information Technology (SLIIT)
+              </p>
+              <p className="edu-meta">Jul 2023 – Jul 2027 · Colombo, Sri Lanka</p>
+              <p className="edu-note">
+                Specialization in Information Technology · coursework across
+                Python, React, PHP, SQL, Kotlin, and more.
+              </p>
+            </div>
+          </motion.article>
 
-          {/* Right Details */}
-          <div className="education-details">
-            <h2>
-              SLIIT - Bachelor of Science - BSc, Information Technology,
-              Specialize in Information Technology
-            </h2>
-            <hr />
-            <p className="education-date">Jul 2023 - Jul 2027</p>
+          <motion.article
+            className="edu-item"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.05 }}
+          >
+            <div className="edu-item-badge edu-item-badge--muted">2023</div>
+            <div className="edu-item-main">
+              <h4 className="edu-degree">
+                Certificate in Professional English &amp; IT
+              </h4>
+              <p className="edu-school">Aquinas College of Higher Studies</p>
+              <p className="edu-meta">March 2023 · Borella</p>
+            </div>
+          </motion.article>
 
-            <h3>Highlights</h3>
-            <ul>
-              <li>Sri Lanka Institute of Information Technology (SLIIT)</li>
-              <li>Grade: 3rd year 2nd semester</li>
-              <li>
-                Skills:
-                <br />
-                Python, Microsoft Office, Front-End Development, Problem
-                Solving, PHP, SQL, English, Team Leadership, React.js,
-                Presentations, Back-End Web Development, Information Technology,
-                JavaScript, Kotlin, Machine Learning
-              </li>
-            </ul>
-          </div>
+          <motion.article
+            className="edu-item"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+          >
+            <div className="edu-item-badge edu-item-badge--muted">2014–2022</div>
+            <div className="edu-item-main">
+              <h4 className="edu-degree">Secondary education</h4>
+              <p className="edu-school">Mahinda Rajapaksha College — Homagama</p>
+              <p className="edu-meta">G.C.E. O/L and A/L</p>
+            </div>
+          </motion.article>
         </div>
 
-        {/* Education Block 2 */}
-        <div className="education-item">
-          {/* Left Card */}
-          <div className="education-card">
-            <div className="education-rating">★★★★</div>
-            <p>
-              Successfully achieved the Certificate in Professional English and
-              Information Technology, improving my expertise in IT and
-              professional English usage
-            </p>
-            <img src={aquainas} alt="SLIIT Logo" />
-          </div>
-
-          {/* Right Details */}
-          <div className="education-details">
-            <h2>Aquinas College of Higher Studies -Borella</h2>
-            <hr />
-            <p className="education-date">March 2023</p>
-
-            <h3>Highlights</h3>
-            <ul>
-              <li>
-                Certificate in Professional English And Information Technology
-              </li>
-              <li>Grade: Successfully Completed</li>
-              <li>
-                Skills:
-                <br />
-                Spoken English, IT
-              </li>
-            </ul>
-          </div>
+        <div className="edu-logos">
+          <img src={sliit} alt="SLIIT" className="edu-logo-img" />
+          <img src={aquainas} alt="Aquinas" className="edu-logo-img" />
+          <img src={mrc} alt="School" className="edu-logo-img" />
         </div>
 
-        {/* Education Block 3 */}
-        <div className="education-item">
-          {/* Left Card */}
-          <div className="education-card">
-            <div className="education-rating">★★★★</div>
-            <p>
-              "Completed (G.C.E.) Ordinary Level and Advanced Level studies at
-              Mahinda Rajapaksha College, Homagama, where I gained comprehensive
-              knowledge across multiple disciplines and actively engaged in both
-              academic and extracurricular activities."
-            </p>
-            <img src={mrc} alt="SLIIT Logo" />
-          </div>
-
-          {/* Right Details */}
-          <div className="education-details">
-            <h2>Mahinda Rajapaksha College - Homagama</h2>
-            <hr />
-            <p className="education-date">2014 - 2022</p>
-
-            <h3>Highlights</h3>
-            <ul>
-              <li>Grade: 6 to 13</li>
-              <li>
-                G.C.E Ordinary Level<br></br>
-                G.C.E Advanced Level
-              </li>
-
-              <li>
-                Skills:
-                <br />
-                Problem Solving, Communication, Team Leadership, Creative
-                Problem Solving
-              </li>
-            </ul>
-          </div>
+        <h3 className="edu-subheading edu-subheading--certs">Certifications</h3>
+        <div className="cert-grid">
+          {certifications.map((c) => (
+            <div key={c.title} className="cert-card">
+              <div className="cert-thumb">
+                <img src={c.image} alt="" />
+              </div>
+              <div className="cert-text">
+                <p className="cert-title">{c.title}</p>
+                <p className="cert-issuer">{c.issuer}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

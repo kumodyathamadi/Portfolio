@@ -1,47 +1,104 @@
 import React from "react";
+import { motion } from "framer-motion";
 import "./Hero.css";
 import mine from "../../assets/mine.png";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 
+const RESUME_URL =
+  "https://mysliit-my.sharepoint.com/:b:/g/personal/it23331136_my_sliit_lk/IQDODqLGPa6SQ4vwVmP-XlCcAWoSNM8tz5aS5q88x4-I-yU?e=zClNvT";
+
 function Hero() {
   return (
-    <div className="hero">
-      <img src={mine} alt="" />
-      <h1>
-        <span>Hello, I'm Kumodya Thamadi </span>
-        <br />
-        "Welcome to my portfolio ,a showcase of my work, skills, and passion for
-        web development."
-      </h1>
-      <p>
-        I am 22-year-old undergraduate girl at the Sri Lanka Institute of
-        Information Technology (SLIIT) with a BSc (Hons) in Information
-        Technology with a Specialization in Information Technology. I have a
-        strong interest in technology and innovation, and I like learning about
-        statistical computing, software development, and new trends in
-        technology.
-      </p>
+    <section id="home" className="hero">
+      <div className="section-wrap hero-inner">
+        <div className="hero-copy">
+          <motion.p
+            className="hero-eyebrow"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            Hello, I&apos;m
+          </motion.p>
+          <motion.h1
+            className="hero-name"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.05 }}
+          >
+            Kumodya Thamadi
+          </motion.h1>
+          <motion.p
+            className="hero-tagline"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.1 }}
+          >
+            IT undergraduate at SLIIT building thoughtful web experiences with
+            React, PHP, and modern databases. Passionate about clean interfaces
+            and reliable backend workflows.
+          </motion.p>
+          <motion.p
+            className="hero-lead"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.15 }}
+          >
+            I enjoy statistical computing, software development, and exploring
+            new tools — from jQuery and AJAX to full-stack coursework projects.
+          </motion.p>
 
-      <div className="hero-action">
-        <div className="hero-connect">
-          <AnchorLink className="anchor_link" offset={50} href="#contact">
-            <p onClick={() => setMenu("contact")}></p>Connect
-          </AnchorLink>
+          <motion.div
+            className="hero-cta"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.2 }}
+          >
+            <AnchorLink
+              className="btn btn-primary"
+              offset={56}
+              href="#projects"
+              data-cursor-hover
+            >
+              View projects
+            </AnchorLink>
+            <a
+              className="btn btn-outline"
+              href={RESUME_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor-hover
+            >
+              Download CV
+            </a>
+          </motion.div>
+
+          <motion.ul
+            className="hero-meta"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.45, delay: 0.28 }}
+          >
+            <li>Colombo, Sri Lanka</li>
+            <li className="hero-meta-dot" aria-hidden />
+            <li>Information Technology undergraduate</li>
+            <li className="hero-meta-dot" aria-hidden />
+            <li>Open to opportunities</li>
+          </motion.ul>
         </div>
-        <div className="hero-resume">
-        <a
-          className="anchor_link"
-          href="https://mysliit-my.sharepoint.com/:b:/g/personal/it23331136_my_sliit_lk/IQDODqLGPa6SQ4vwVmP-XlCcAWoSNM8tz5aS5q88x4-I-yU?e=zClNvT"
-          target="_blank" // opens in new tab
-          rel="noopener noreferrer" // security best practice
+
+        <motion.div
+          className="hero-visual"
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.55, delay: 0.1 }}
         >
-          My Resume
-        </a>
-        </div>
+          <div className="hero-photo-frame">
+            <img src={mine} alt="Kumodya Thamadi" className="hero-photo" />
+          </div>
+        </motion.div>
       </div>
-
-      
-    </div>
+    </section>
   );
 }
 

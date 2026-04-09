@@ -1,81 +1,54 @@
 import React from "react";
+import { motion } from "framer-motion";
 import "./About.css";
-import aboutimg from "../../assets/aboutimg.png";
-import mine2 from "../../assets/mine2.jpg";
 
 function About() {
   return (
-    <div id="about" className="about">
-      <div className="about-title">
-        <h1>About me</h1>
-        <img src={aboutimg} alt="" />
-      </div>
+    <section
+      id="about"
+      className="about section-block"
+    >
+      <div className="section-wrap">
+        <p className="section-label">About me</p>
+        <h2 className="section-heading">
+          Turning ideas into
+          <br />
+          digital experiences
+        </h2>
+        <p className="section-sub about-intro">
+          I&apos;m an undergraduate at the Sri Lanka Institute of Information
+          Technology (SLIIT), specializing in Information Technology. I love
+          picking up new skills, shipping coursework and personal projects, and
+          staying curious about how software can solve real problems.
+        </p>
+        <p className="about-body">
+          My strengths include teamwork, communication, and project delivery.
+          I&apos;m motivated by continuous learning and contributing to
+          well-structured, maintainable code — whether on the front end with
+          React or on the server with PHP and MySQL.
+        </p>
 
-      <div className="about-sections">
-        <div className="about-left">
-          <img src={mine2} alt="" />
-        </div>
-
-        <div className="about-right">
-          <div className="about-para">
-            <p>
-              I enjoy working on new projects, choosing up new skills, and
-              keeping up with the most recent developments in IT when I have
-              free time. I'm constantly excited to meet like-minded people and
-              and collaborative setting.
-              technical proficiency,</p>
-              <p>I also have excellent leadership, teamwork,
-              communication, and project management abilities. I am committed to
-              continuous learning and professional growth, and I am eager to
-              contribute to innovative software solutions and succeed in dynamic
-            </p>
-          </div>
-
-          <div className="about-skills">
-            <div className="about-skill">
-              <p>HTML & CSS</p><hr style={{width:"60%"}}/>
-            </div>
-            <div className="about-skill">
-              <p>JavaScript</p><hr style={{width:"50%"}}/>
-            </div>
-            <div className="about-skill">
-              <p>React</p><hr style={{width:"35%"}}/>
-            </div>
-            
-
-            <div className="about-skill">
-              <p>PHP</p><hr style={{width:"40%"}}/>
-            </div>
-            <div className="about-skill">
-              <p>MYSQL</p><hr style={{width:"45%"}}/>
-            </div>
-            <div className="about-skill">
-              <p>SQL</p><hr style={{width:"40%"}}/>
-            </div>
-
-            
-          </div>
+        <div className="about-stats">
+          {[
+            { value: "8+", label: "Projects completed" },
+            { value: "6+", label: "Months experience" },
+            { value: "4+", label: "Certificates" },
+          ].map((s) => (
+            <motion.div
+              key={s.label}
+              className="about-stat-card"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+            >
+              <span className="about-stat-value">{s.value}</span>
+              <span className="about-stat-label">{s.label}</span>
+            </motion.div>
+          ))}
         </div>
       </div>
-
-      <div className="about-achievements">
-        <div className="about-achievement">
-          <h1>6+ Months</h1>
-          <p>EXPERIENCE</p>
-        </div>
-        <hr/>
-
-        <div className="about-achievement">
-          <h1>8+</h1>
-          <p>PROJECTS COMPLETED</p>
-        </div>
-        <hr/>
-        
-        
-        <hr/>
-        
-      </div>
-    </div>
+    </section>
   );
 }
 
