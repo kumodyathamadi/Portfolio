@@ -8,6 +8,13 @@ import ct1 from "../../assets/ct1.jpg";
 import ct2 from "../../assets/ct2.jpg";
 import ct3 from "../../assets/ct3.jpg";
 import ct4 from "../../assets/ct4.jpg";
+import mongo1 from "../../assets/mongo (1).jpg";
+import mongo2 from "../../assets/mongo (2).jpg";
+import mongo3 from "../../assets/mongo (3).jpg";
+import mongo4 from "../../assets/mongo (4).jpg";
+import mongo5 from "../../assets/mongo (5).jpg";
+import mongo6 from "../../assets/mongo (6).jpg";
+import mongo7 from "../../assets/mongo (7).jpg";
 
 const certifications = [
   {
@@ -29,6 +36,41 @@ const certifications = [
     title: "Handling, storing & managing data for information management",
     issuer: "UNICEF",
     image: ct2,
+  },
+   {
+    title: "MongoDB Logging Basics",
+    issuer: "Mongo DB",
+    image: mongo1,
+  },
+  {
+    title: "MongoDB Atlas Upgrades & Maintenance",
+    issuer: "Mongo DB",
+    image: mongo2,
+  },
+  {
+    title: "MongoDB Atlas Administration",
+    issuer: "Mongo DB",
+    image: mongo3,
+  },
+  {
+    title: "Replication in MongoDB",
+    issuer: "Mongo DB",
+    image: mongo4,
+  },
+  {
+    title: "Getting Started with MongoDB Atlas",
+    issuer: "Mongo DB",
+    image: mongo5,
+  },
+  {
+    title: "MongoDB Atlas Security",
+    issuer: "Mongo DB",
+    image: mongo6,
+  },
+  {
+    title: "Monitoring and Insights with MongoDB's Observability Suite",
+    issuer: "Mongo DB",
+    image: mongo7,
   },
 ];
 
@@ -86,6 +128,23 @@ function Education() {
           </motion.article>
 
           <motion.article
+            className="edu-item"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+          >
+            <div className="edu-item-badge edu-item-badge--muted">2014–2022</div>
+            <div className="edu-item-main">
+              <h4 className="edu-degree">Secondary education</h4>
+              <p className="edu-school">Mahinda Rajapaksha College — Homagama</p>
+              <p className="edu-meta">G.C.E. O/L and A/L</p>
+            </div>
+          </motion.article>
+
+
+
+           <motion.article
             className="edu-item"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
