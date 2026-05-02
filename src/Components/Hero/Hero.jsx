@@ -5,7 +5,7 @@ import mine from "../../assets/mine.png";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 
 const RESUME_URL =
-  "https://mysliit-my.sharepoint.com/:b:/g/personal/it23331136_my_sliit_lk/IQDODqLGPa6SQ4vwVmP-XlCcAWoSNM8tz5aS5q88x4-I-yU?e=zClNvT";
+  "https://mysliit-my.sharepoint.com/:b:/g/personal/it23331136_my_sliit_lk/IQA4jROddbsWQbhQTjnmbJBiAR_530cwa8I5YZIqq4UvDNw?e=1zKikx";
 
 function Hero() {
   return (
