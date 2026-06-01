@@ -97,27 +97,6 @@ function MyWork() {
             </motion.article>
           ))}
         </div>
-
-        <h3 className="other-heading">Other notable work</h3>
-        <div className="other-grid">
-          {other.map((project) => (
-            <button
-              key={project.w_no}
-              type="button"
-              className="other-card"
-              onClick={() => setActive(project)}
-              data-cursor-hover
-            >
-              <div className="other-thumb">
-                <img src={project.w_img} alt="" />
-              </div>
-              <div className="other-body">
-                <p className="other-title">{project.w_name}</p>
-                <p className="other-desc">{project.w_desc}</p>
-              </div>
-            </button>
-          ))}
-        </div>
       </div>
 
       <Modal
