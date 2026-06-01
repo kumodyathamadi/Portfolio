@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import "./Education.css";
+import Modal from "../Modal/Modal";
 import sliit from "../../assets/sliit.webp";
 import aquainas from "../../assets/aquinas.jpg";
 import mrc from "../../assets/mrc.jpeg";
@@ -37,7 +38,7 @@ const certifications = [
     issuer: "UNICEF",
     image: ct2,
   },
-   {
+  {
     title: "MongoDB Logging Basics",
     issuer: "Mongo DB",
     image: mongo1,
@@ -75,6 +76,9 @@ const certifications = [
 ];
 
 function Education() {
+  const [selected, setSelected] = useState(null);
+  const handleClose = useCallback(() => setSelected(null), []);
+
   return (
     <section id="education" className="edu section-block">
       <div className="section-wrap">
@@ -141,23 +145,6 @@ function Education() {
               <p className="edu-meta">G.C.E. O/L and A/L</p>
             </div>
           </motion.article>
-
-
-
-           <motion.article
-            className="edu-item"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-          >
-            <div className="edu-item-badge edu-item-badge--muted">2014–2022</div>
-            <div className="edu-item-main">
-              <h4 className="edu-degree">Secondary education</h4>
-              <p className="edu-school">Mahinda Rajapaksha College — Homagama</p>
-              <p className="edu-meta">G.C.E. O/L and A/L</p>
-            </div>
-          </motion.article>
         </div>
 
         <div className="edu-logos">
@@ -169,9 +156,23 @@ function Education() {
         <h3 className="edu-subheading edu-subheading--certs">Certifications</h3>
         <div className="cert-grid">
           {certifications.map((c) => (
-            <div key={c.title} className="cert-card">
+            <div
+              key={c.title}
+              className="cert-card cert-card--clickable"
+              onClick={() => setSelected(c)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && setSelected(c)}
+              aria-label={`View ${c.title} certificate`}
+            >
               <div className="cert-thumb">
                 <img src={c.image} alt="" />
+                <div className="cert-thumb-hint" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+                  </svg>
+                </div>
               </div>
               <div className="cert-text">
                 <p className="cert-title">{c.title}</p>
@@ -181,6 +182,23 @@ function Education() {
           ))}
         </div>
       </div>
+
+      <Modal
+        isOpen={!!selected}
+        onClose={handleClose}
+        title={selected?.title}
+      >
+        {selected && (
+          <div className="edu-cert-modal-content">
+            <img
+              src={selected.image}
+              alt={selected.title}
+              className="edu-cert-modal-img"
+            />
+            <p className="edu-cert-modal-issuer">Issued by {selected.issuer}</p>
+          </div>
+        )}
+      </Modal>
     </section>
   );
 }

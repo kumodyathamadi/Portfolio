@@ -100,3 +100,51 @@
   color: var(--text-muted);
   background: rgba(255, 255, 255, 0.04);
 }
+
+/* ── Clickable card ── */
+.certificate-card--clickable {
+  cursor: pointer;
+}
+
+/* ── Zoom hint overlay on image hover ── */
+.certificate-img-wrap {
+  position: relative;
+}
+
+.certificate-zoom-hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  border-radius: var(--radius-md);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.certificate-card--clickable:hover .certificate-zoom-hint {
+  opacity: 1;
+}
+
+/* ── Certificate modal ── */
+.cert-modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cert-modal-img {
+  width: 100%;
+  border-radius: var(--radius-md);
+  display: block;
+  border: 1px solid var(--glass-border);
+}
+
+.cert-modal-issuer {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0;
+}

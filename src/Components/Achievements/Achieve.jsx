@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import "./Achieve.css";
+import Modal from "../Modal/Modal";
 import ct1 from "../../assets/ct1.jpg";
 import ct2 from "../../assets/ct2.jpg";
 import ct3 from "../../assets/ct3.jpg";
@@ -35,6 +36,9 @@ const certificateData = [
 ];
 
 function Achieve() {
+  const [selected, setSelected] = useState(null);
+  const handleClose = useCallback(() => setSelected(null), []);
+
   return (
     <div className="certificates">
       <motion.div
@@ -64,7 +68,12 @@ function Achieve() {
         {certificateData.map((cert) => (
           <motion.article
             key={cert.title}
-            className="certificate-card"
+            className="certificate-card certificate-card--clickable"
+            onClick={() => setSelected(cert)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === "Enter" && setSelected(cert)}
+            aria-label={`View ${cert.title} certificate`}
             variants={{
               hidden: { opacity: 0, y: 32 },
               show: {
@@ -78,6 +87,12 @@ function Achieve() {
           >
             <div className="certificate-img-wrap">
               <img src={cert.image} alt={cert.title} />
+              <div className="certificate-zoom-hint" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                  <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+                </svg>
+              </div>
             </div>
             <h2>{cert.title}</h2>
             <p>Issued by {cert.issuer}</p>
@@ -87,6 +102,7 @@ function Achieve() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor-hover
+                onClick={(e) => e.stopPropagation()}
               >
                 View certificate
               </a>
@@ -96,6 +112,23 @@ function Achieve() {
           </motion.article>
         ))}
       </motion.div>
+
+      <Modal
+        isOpen={!!selected}
+        onClose={handleClose}
+        title={selected?.title}
+      >
+        {selected && (
+          <div className="cert-modal-content">
+            <img
+              src={selected.image}
+              alt={selected.title}
+              className="cert-modal-img"
+            />
+            <p className="cert-modal-issuer">Issued by {selected.issuer}</p>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 }
