@@ -98,7 +98,10 @@ function Education() {
             viewport={{ once: true }}
             transition={{ duration: 0.4 }}
           >
-            <div className="edu-item-badge">Current</div>
+            <div className="edu-item-left">
+              <div className="edu-item-badge">Current</div>
+              <img src={sliit} alt="SLIIT" className="edu-logo-img" />
+            </div>
             <div className="edu-item-main">
               <h4 className="edu-degree">
                 BSc (Hons) in Information Technology
@@ -121,7 +124,10 @@ function Education() {
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.05 }}
           >
-            <div className="edu-item-badge edu-item-badge--muted">2023</div>
+            <div className="edu-item-left">
+              <div className="edu-item-badge edu-item-badge--muted">2023</div>
+              <img src={aquainas} alt="Aquinas" className="edu-logo-img" />
+            </div>
             <div className="edu-item-main">
               <h4 className="edu-degree">
                 Certificate in Professional English &amp; IT
@@ -138,19 +144,16 @@ function Education() {
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
-            <div className="edu-item-badge edu-item-badge--muted">2014–2022</div>
+            <div className="edu-item-left">
+              <div className="edu-item-badge edu-item-badge--muted">2014–2022</div>
+              <img src={mrc} alt="Mahinda Rajapaksha College" className="edu-logo-img" />
+            </div>
             <div className="edu-item-main">
               <h4 className="edu-degree">Secondary education</h4>
               <p className="edu-school">Mahinda Rajapaksha College — Homagama</p>
               <p className="edu-meta">G.C.E. O/L and A/L</p>
             </div>
           </motion.article>
-        </div>
-
-        <div className="edu-logos">
-          <img src={sliit} alt="SLIIT" className="edu-logo-img" />
-          <img src={aquainas} alt="Aquinas" className="edu-logo-img" />
-          <img src={mrc} alt="School" className="edu-logo-img" />
         </div>
 
         <h3 className="edu-subheading edu-subheading--certs">Certifications</h3>

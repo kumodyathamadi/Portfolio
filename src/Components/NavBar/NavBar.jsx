@@ -6,7 +6,7 @@ import menu_open from "../../assets/menu_open.svg";
 import menu_close from "../../assets/menu_close.svg";
 
 const RESUME_URL =
-  "https://mysliit-my.sharepoint.com/:b:/g/personal/it23331136_my_sliit_lk/IQDODqLGPa6SQ4vwVmP-XlCcAWoSNM8tz5aS5q88x4-I-yU?e=zClNvT";
+  "https://mysliit-my.sharepoint.com/my?id=%2Fpersonal%2Fit23331136%5Fmy%5Fsliit%5Flk%2FDocuments%2FINTERN%2FKUMODYA%20CV%2Epdf&parent=%2Fpersonal%2Fit23331136%5Fmy%5Fsliit%5Flk%2FDocuments%2FINTERN&ga=1";
 
 function NavBar() {
   const [mobileOpen, setMobileOpen] = useState(false);

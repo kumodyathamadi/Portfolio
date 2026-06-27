@@ -8,7 +8,6 @@ import Education from "./Components/Education/Education";
 import MyWork from "./Components/MyWork/MyWork";
 import Contact from "./Components/Contact/Contact";
 import Footer from "./Components/Footer/Footer";
-import CustomCursor from "./Components/CustomCursor/CustomCursor";
 
 const App = () => {
   return (
@@ -18,7 +17,6 @@ const App = () => {
         <div className="app-bg-orb app-bg-orb--b" />
         <div className="app-bg-grid" />
       </div>
-      <CustomCursor />
       <NavBar />
       <Hero />
       <About />

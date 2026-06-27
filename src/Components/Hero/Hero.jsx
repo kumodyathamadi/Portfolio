@@ -5,7 +5,7 @@ import mine from "../../assets/mine.png";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 
 const RESUME_URL =
-  "https://mysliit-my.sharepoint.com/:b:/g/personal/it23331136_my_sliit_lk/IQA4jROddbsWQbhQTjnmbJBiAR_530cwa8I5YZIqq4UvDNw?e=1zKikx";
+  "https://mysliit-my.sharepoint.com/my?id=%2Fpersonal%2Fit23331136%5Fmy%5Fsliit%5Flk%2FDocuments%2FINTERN%2FKUMODYA%20CV%2Epdf&parent=%2Fpersonal%2Fit23331136%5Fmy%5Fsliit%5Flk%2FDocuments%2FINTERN&ga=1";
 
 function Hero() {
   return (

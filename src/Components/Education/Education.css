@@ -24,13 +24,20 @@
 
 .edu-item {
   display: grid;
-  grid-template-columns: 100px 1fr;
+  grid-template-columns: 110px 1fr;
   gap: 20px;
   padding: 22px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
   background: var(--surface);
   align-items: start;
+}
+
+.edu-item-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
 }
 
 .edu-item-badge {
@@ -76,20 +83,13 @@
   line-height: 1.55;
 }
 
-.edu-logos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  align-items: center;
-  margin-top: 28px;
-  opacity: 0.85;
-}
-
 .edu-logo-img {
-  height: 40px;
+  height: 36px;
   width: auto;
+  max-width: 100px;
   object-fit: contain;
-  filter: grayscale(0.2);
+  filter: grayscale(0.15) brightness(0.95);
+  border-radius: 6px;
 }
 
 .cert-grid {
@@ -138,6 +138,12 @@
 @media (max-width: 640px) {
   .edu-item {
     grid-template-columns: 1fr;
+  }
+
+  .edu-item-left {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
   }
 
   .cert-grid {
