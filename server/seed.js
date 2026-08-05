@@ -1,0 +1,280 @@
+import dotenv from "dotenv";
+import { connectDB } from "./config/db.js";
+import User from "./models/User.js";
+import Profile from "./models/Profile.js";
+import Project from "./models/Project.js";
+import Certificate from "./models/Certificate.js";
+import Skill from "./models/Skill.js";
+import Education from "./models/Education.js";
+import Experience from "./models/Experience.js";
+import { saveStore } from "./data/fallbackStore.js";
+
+dotenv.config();
+
+const initialProfile = {
+  name: "Kumodya Thamadi",
+  title: "Full-Stack Software Developer",
+  about:
+    "Passionate Information Technology student at SLIIT specializing in Full-Stack Web Application Development (MERN & Spring Boot), RESTful API design, and Database Architecture.",
+  image: "/src/assets/mine2.jpg",
+  email: "kumodyathamadi@gmail.com",
+  phone: "+94 77 123 4567",
+  location: "Colombo, Sri Lanka",
+  resumeUrl:
+    "https://mysliit-my.sharepoint.com/my?id=%2Fpersonal%2Fit23331136%5Fmy%5Fsliit%5Flk%2FDocuments%2FINTERN%2FKUMODYA%20CV%2Epdf&parent=%2Fpersonal%2Fit23331136%5Fmy%5Fsliit%5Flk%2FDocuments%2FINTERN&ga=1",
+  githubUrl: "https://github.com/",
+  linkedinUrl: "https://linkedin.com/",
+};
+
+const initialProjects = [
+  {
+    _id: "proj_1",
+    title: "Online Food Delivery Application",
+    subtitle: "Full-Stack MERN Food Delivery Web App",
+    description:
+      "A full-stack Online Food Delivery Web Application built using the MERN stack to understand real-world full-stack development concepts. Features secure authentication, food browsing, cart management, online payment, and real-time delivery tracking.",
+    category: "MERN Stack",
+    technologies: ["React.js", "Node.js", "Express.js", "MongoDB", "JWT", "Stripe", "MERN"],
+    bullets: [
+      "Secure user registration & login with JWT authentication",
+      "Search food items and add to cart",
+      "Online payment integration with Stripe (test mode)",
+      "Real-time delivery status tracking",
+      "Admin panel: add/remove food items, manage listings & order status",
+    ],
+    image: "/src/assets/img7.jpg",
+    featured: true,
+    status: "Completed",
+    order: 1,
+  },
+  {
+    _id: "proj_2",
+    title: "Smart Campus Operations Hub",
+    subtitle: "Full-Stack Facility & Incident Management Platform",
+    description:
+      "A full-stack web application designed to modernize university operations by integrating facility management, booking workflows, and incident handling into one unified platform.",
+    category: "Spring Boot",
+    technologies: ["Spring Boot", "React", "MongoDB", "Firebase", "REST API"],
+    bullets: [
+      "Resource & facility management",
+      "Booking system with approval workflow",
+      "Incident/ticket management with real-time tracking",
+      "Notifications for seamless communication",
+      "Secure authentication with Firebase OAuth 2.0 and role-based access",
+    ],
+    image: "/src/assets/img5.png",
+    featured: true,
+    status: "Completed",
+    order: 2,
+  },
+  {
+    _id: "proj_3",
+    title: "Online Counseling Management System",
+    subtitle: "MERN Stack Counseling Appointment Web App",
+    description:
+      "A full-stack Online Counseling Management Web Application to simplify and improve the counseling appointment process for university students.",
+    category: "MERN Stack",
+    technologies: ["MongoDB", "Express.js", "React", "Node.js", "Playwright", "Vite"],
+    bullets: [
+      "Admin & Counselor Management module",
+      "Counselor and course management features",
+      "CRUD operations and scheduling functionalities",
+    ],
+    image: "/src/assets/img6.png",
+    featured: true,
+    status: "Completed",
+    order: 3,
+  },
+  {
+    _id: "proj_4",
+    title: "IT Help Desk System",
+    subtitle: "Internship Project — Internal IT Issue Tracking Platform",
+    description:
+      "During my internship, I contributed to the development of an internal web-based IT Help Desk System designed to streamline the reporting, tracking, and resolution of IT issues.",
+    category: "PHP & SQL",
+    technologies: ["PHP", "AJAX", "JSON", "SQL", "MySQL"],
+    bullets: [
+      "Streamlined IT issue reporting and tracking workflow",
+      "Covers hardware, software, network & new system requests",
+      "Improved response time and accountability between staff and IT",
+    ],
+    image: "/src/assets/prj_1.png",
+    featured: true,
+    status: "Completed",
+    order: 4,
+  },
+  {
+    _id: "proj_5",
+    title: "Grievances Management System",
+    subtitle: "Internship Project — Organizational Grievance Tracking Platform",
+    description:
+      "My second internship project — a Grievances Management System designed to efficiently manage, track, and resolve grievances within an organization.",
+    category: "PHP & SQL",
+    technologies: ["PHP", "AJAX", "JSON", "SQL", "MySQL"],
+    bullets: [
+      "Structured grievance submission and tracking workflow",
+      "Transparency and accountability through status visibility",
+    ],
+    image: "/src/assets/prj_2.png",
+    featured: true,
+    status: "Completed",
+    order: 5,
+  },
+];
+
+const initialCertificates = [
+  {
+    _id: "cert_1",
+    title: "Python for Beginners Course",
+    issuer: "University of Moratuwa",
+    issueDate: "2024",
+    image: "/src/assets/ct4.jpg",
+    category: "Programming",
+  },
+  {
+    _id: "cert_2",
+    title: "Web Design for Beginners",
+    issuer: "University of Moratuwa",
+    issueDate: "2024",
+    image: "/src/assets/ct3.jpg",
+    category: "Web Development",
+  },
+  {
+    _id: "cert_3",
+    title: "SQL Analytics and BI on Databricks",
+    issuer: "Simplilearn",
+    issueDate: "2024",
+    image: "/src/assets/ct1.jpg",
+    category: "Data & BI",
+  },
+  {
+    _id: "cert_4",
+    title: "Handling, storing & managing data for information management",
+    issuer: "UNICEF",
+    issueDate: "2024",
+    image: "/src/assets/ct2.jpg",
+    category: "Data Management",
+  },
+];
+
+const initialSkills = [
+  { _id: "skill_1", name: "JavaScript", category: "Languages", level: "Advanced", order: 1 },
+  { _id: "skill_2", name: "PHP", category: "Languages", level: "Intermediate", order: 2 },
+  { _id: "skill_3", name: "SQL", category: "Languages", level: "Advanced", order: 3 },
+  { _id: "skill_4", name: "HTML5 & CSS3", category: "Languages", level: "Expert", order: 4 },
+  { _id: "skill_5", name: "React", category: "Frontend", level: "Advanced", order: 5 },
+  { _id: "skill_6", name: "Node.js & Express", category: "Backend & Data", level: "Advanced", order: 6 },
+  { _id: "skill_7", name: "Spring Boot", category: "Backend & Data", level: "Intermediate", order: 7 },
+  { _id: "skill_8", name: "MongoDB & MySQL", category: "Backend & Data", level: "Advanced", order: 8 },
+  { _id: "skill_9", name: "REST APIs", category: "Backend & Data", level: "Advanced", order: 9 },
+  { _id: "skill_10", name: "Git & GitHub", category: "Tools", level: "Advanced", order: 10 },
+];
+
+const initialEducation = [
+  {
+    _id: "edu_1",
+    degree: "BSc (Hons) in Information Technology",
+    institute: "Sri Lanka Institute of Information Technology (SLIIT)",
+    duration: "Jul 2023 – Jul 2027",
+    location: "Colombo, Sri Lanka",
+    badge: "Current",
+    logo: "/src/assets/sliit.webp",
+    achievements: [
+      "Specialization in Information Technology",
+      "Coursework across Python, React, PHP, SQL, Kotlin, and MERN stack",
+    ],
+    order: 1,
+  },
+  {
+    _id: "edu_2",
+    degree: "Certificate in Professional English & IT",
+    institute: "Aquinas College of Higher Studies",
+    duration: "March 2023",
+    location: "Borella, Sri Lanka",
+    badge: "2023",
+    logo: "/src/assets/aquinas.jpg",
+    achievements: ["English communication skills and core IT foundation"],
+    order: 2,
+  },
+  {
+    _id: "edu_3",
+    degree: "Secondary Education",
+    institute: "Mahinda Rajapaksha College — Homagama",
+    duration: "2014 – 2022",
+    location: "Homagama, Sri Lanka",
+    badge: "2014–2022",
+    logo: "/src/assets/mrc.jpeg",
+    achievements: ["Completed G.C.E. O/L and A/L examinations"],
+    order: 3,
+  },
+];
+
+const initialExperience = [
+  {
+    _id: "exp_1",
+    company: "Miami Clothing (Pvt) Ltd",
+    position: "Intern Software Developer",
+    duration: "June 2025 – December 2025",
+    summary:
+      "Six months of hands-on development on production internal systems, collaborating on requirements, implementation, and testing.",
+    responsibilities: [
+      "Built a Grievance Management System using PHP, MySQL, HTML, CSS, JavaScript, jQuery, JSON, and AJAX; used Navicat for database work.",
+      "Delivered an IT Help Desk System with the same stack to improve internal support workflows and ticket handling.",
+    ],
+    technologies: ["PHP", "MySQL", "JavaScript", "jQuery", "AJAX", "JSON", "Navicat"],
+    logo: "/src/assets/miamii.png",
+    order: 1,
+  },
+];
+
+export const seedDatabase = async () => {
+  console.log("[Seed] Starting database seed process...");
+
+  const isConnected = await connectDB();
+
+  if (isConnected) {
+    try {
+      await User.deleteMany({});
+      await Profile.deleteMany({});
+      await Project.deleteMany({});
+      await Certificate.deleteMany({});
+      await Skill.deleteMany({});
+      await Education.deleteMany({});
+      await Experience.deleteMany({});
+
+      await User.create({
+        username: "admin",
+        password: "admin123",
+        role: "admin",
+      });
+
+      await Profile.create(initialProfile);
+      await Project.insertMany(initialProjects);
+      await Certificate.insertMany(initialCertificates);
+      await Skill.insertMany(initialSkills);
+      await Education.insertMany(initialEducation);
+      await Experience.insertMany(initialExperience);
+
+      console.log("=== MongoDB Seed Completed Successfully ===");
+    } catch (err) {
+      console.error("[Seed Error]", err);
+    }
+  }
+
+  // Always sync & save fallback store
+  saveStore({
+    profile: initialProfile,
+    projects: initialProjects,
+    certificates: initialCertificates,
+    skills: initialSkills,
+    education: initialEducation,
+    experience: initialExperience,
+  });
+
+  console.log("=== Fallback Data Store Seeded Successfully ===");
+  process.exit(0);
+};
+
+if (process.argv[1]?.includes("seed.js")) {
+  seedDatabase();
+}

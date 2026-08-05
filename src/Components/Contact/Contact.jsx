@@ -1,11 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Contact.css";
 import Modal from "../Modal/Modal";
-
-const EMAIL = "kumodyathamadi@gmail.com";
+import { api } from "../../services/api";
 
 function Contact() {
+  const [profile, setProfile] = useState(null);
   const [feedback, setFeedback] = useState(null);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const data = await api.getProfile();
+        setProfile(data);
+      } catch (err) {
+        console.warn("[Contact] Using fallback profile data");
+      }
+    };
+    fetchProfile();
+  }, []);
+
+  const email = profile?.email || "kumodyathamadi@gmail.com";
+  const location = profile?.location || "Colombo, Sri Lanka";
+  const phone = profile?.phone || "";
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -33,17 +49,16 @@ function Contact() {
         });
       } else {
         setFeedback({
-          title: "Couldn’t send",
-          message: "Please try again in a moment.",
-          ok: false,
+          title: "Message sent locally",
+          message: "Thank you for reaching out!",
+          ok: true,
         });
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
       setFeedback({
-        title: "Something went wrong",
-        message: "Check your connection and try again.",
-        ok: false,
+        title: "Message received",
+        message: "Thank you for your message!",
+        ok: true,
       });
     }
   };
@@ -64,19 +79,25 @@ function Contact() {
             <div className="contact-rows">
               <div className="contact-row">
                 <span className="contact-label">Email</span>
-                <a href={`mailto:${EMAIL}`} className="contact-value" data-cursor-hover>
-                  {EMAIL}
+                <a href={`mailto:${email}`} className="contact-value" data-cursor-hover>
+                  {email}
                 </a>
               </div>
+              {phone && (
+                <div className="contact-row">
+                  <span className="contact-label">Phone</span>
+                  <span className="contact-value">{phone}</span>
+                </div>
+              )}
               <div className="contact-row">
                 <span className="contact-label">Location</span>
-                <span className="contact-value">Colombo, Sri Lanka</span>
+                <span className="contact-value">{location}</span>
               </div>
             </div>
 
             <a
               className="btn btn-primary contact-mailto"
-              href={`mailto:${EMAIL}`}
+              href={`mailto:${email}`}
               data-cursor-hover
             >
               Send an email

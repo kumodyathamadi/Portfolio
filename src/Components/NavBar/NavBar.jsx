@@ -8,7 +8,7 @@ import menu_close from "../../assets/menu_close.svg";
 const RESUME_URL =
   "https://mysliit-my.sharepoint.com/my?id=%2Fpersonal%2Fit23331136%5Fmy%5Fsliit%5Flk%2FDocuments%2FINTERN%2FKUMODYA%20CV%2Epdf&parent=%2Fpersonal%2Fit23331136%5Fmy%5Fsliit%5Flk%2FDocuments%2FINTERN&ga=1";
 
-function NavBar() {
+function NavBar({ onOpenAdmin }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const closeMenu = () => setMobileOpen(false);
 
@@ -68,7 +68,7 @@ function NavBar() {
           </ul>
         </nav>
 
-        <div className="nav-actions">
+        <div className="nav-actions" style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
           <a
             className="nav-resume"
             href={RESUME_URL}

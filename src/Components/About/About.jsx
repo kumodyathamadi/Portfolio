@@ -1,13 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import "./About.css";
+import { api } from "../../services/api";
 
 function About() {
+  const [profile, setProfile] = useState(null);
+  const [stats, setStats] = useState({ projects: "8+", experience: "6+", certificates: "4+" });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [profData, projectsData, certsData] = await Promise.all([
+          api.getProfile().catch(() => null),
+          api.getProjects().catch(() => []),
+          api.getCertificates().catch(() => []),
+        ]);
+
+        if (profData) setProfile(profData);
+        if (projectsData.length > 0 || certsData.length > 0) {
+          setStats({
+            projects: `${projectsData.length || 8}+`,
+            experience: "6+ Months",
+            certificates: `${certsData.length || 4}+`,
+          });
+        }
+      } catch (err) {
+        console.warn("[About] Using fallback profile data");
+      }
+    };
+    fetchData();
+  }, []);
+
+  const aboutIntro = profile?.about || "I'm an undergraduate at the Sri Lanka Institute of Information Technology (SLIIT), specializing in Information Technology.";
+
   return (
-    <section
-      id="about"
-      className="about section-block"
-    >
+    <section id="about" className="about section-block">
       <div className="section-wrap">
         <p className="section-label">About me</p>
         <h2 className="section-heading">
@@ -15,24 +42,16 @@ function About() {
           <br />
           digital experiences
         </h2>
-        <p className="section-sub about-intro">
-          I&apos;m an undergraduate at the Sri Lanka Institute of Information
-          Technology (SLIIT), specializing in Information Technology. I love
-          picking up new skills, shipping coursework and personal projects, and
-          staying curious about how software can solve real problems.
-        </p>
+        <p className="section-sub about-intro">{aboutIntro}</p>
         <p className="about-body">
-          My strengths include teamwork, communication, and project delivery.
-          I&apos;m motivated by continuous learning and contributing to
-          well-structured, maintainable code — whether on the front end with
-          React or on the server with PHP and MySQL.
+          My strengths include full-stack software development, database design, REST API architecture, and team collaboration. I&apos;m motivated by continuous learning and building production-grade code — whether on the front end with React or on the server with Node.js and Spring Boot.
         </p>
 
         <div className="about-stats">
           {[
-            { value: "8+", label: "Projects completed" },
-            { value: "6+", label: "Months experience" },
-            { value: "4+", label: "Certificates" },
+            { value: stats.projects, label: "Projects completed" },
+            { value: stats.experience, label: "Professional experience" },
+            { value: stats.certificates, label: "Certificates earned" },
           ].map((s) => (
             <motion.div
               key={s.label}
